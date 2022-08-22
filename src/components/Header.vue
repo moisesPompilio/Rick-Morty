@@ -2,28 +2,17 @@
   <div>
     <header>
       <nav class="container">
-        <a @click="redirectToHome()"
-          ><img
-            src="http://assets.stickpng.com/images/58f37720a4fa116215a9240f.png"
-            alt="Logo"
-            id="logo"
-        /></a>
+        <a @click="redirectToHome()"><img src="http://assets.stickpng.com/images/58f37720a4fa116215a9240f.png"
+            alt="Logo" id="logo" /></a>
 
-        <img
-          @click="menuactive()"
+        <img @click="menuactive()"
           src="https://raw.githubusercontent.com/william-costa/wdev-mock-site-resources/master/assets/images/menu.svg"
-          alt="Abrir menu"
-          id="menu-button"
-        />
+          alt="Abrir menu" id="menu-button" />
 
         <div id="menu-overlay" v-if="menuActive" @click="menuactive()"></div>
 
         <div id="menu-items" :class="{ active: menuActive }">
-          <img
-            src="https://raw.githubusercontent.com/william-costa/wdev-mock-site-resources/master/assets/images/wdev.svg"
-            alt="WDEV"
-            id="menu-logo"
-          />
+          <img src="http://assets.stickpng.com/images/58f37720a4fa116215a9240f.png" alt="WDEV" id="menu-logo" />
           <ul>
             <li><a @click="redirectToPersonagem()">Personagem</a></li>
             <li><a @click="redirectToEpsidio()">Episodio</a></li>
@@ -41,10 +30,7 @@ export default {
   name: "Header",
   data() {
     return {
-      menuActive: {
-        default:false,
-        type:Boolean
-      },
+      menuActive: false,
     };
   },
   methods: {
@@ -52,16 +38,20 @@ export default {
       this.menuActive = !this.menuActive;
     },
     redirectToHome() {
-      this.$router.push("/").catch(() => {});
+      this.$router.push("/").catch(() => { });
+      this.menuactive();
     },
     redirectToLocal() {
-      this.$router.push("/local").catch(() => {});
+      this.menuactive();
+      this.$router.push("/local").catch(() => { });
     },
     redirectToPersonagem() {
-      this.$router.push("/personagem").catch(() => {});
+      this.menuactive();
+      this.$router.push("/personagem").catch(() => { });
     },
     redirectToEpsidio() {
-      this.$router.push("/episodio").catch(() => {});
+      this.menuactive();
+      this.$router.push("/episodio").catch(() => { });
     },
   },
 };
@@ -74,6 +64,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  justify-items: space-between;
 }
 
 #logo {
@@ -82,15 +73,18 @@ header {
   width: auto;
   height: 65px;
 }
+
 #menu-button {
   width: 30px;
 }
+
 nav {
   display: flex;
   justify-content: space-between;
   height: 60px;
   align-items: center;
 }
+
 #menu-overlay {
   position: fixed;
   top: 0;
@@ -106,6 +100,7 @@ nav {
   margin-top: 30px;
   margin-bottom: 10px;
 }
+
 #menu-items {
   position: fixed;
   top: 0;
@@ -118,38 +113,47 @@ nav {
   justify-content: flex-start;
   align-items: center;
 }
+
 #menu-items.active {
   display: flex;
 }
+
 ul {
   list-style-type: none;
   text-align: center;
 }
+
 ul li {
   margin: 20px 0px;
 }
+
 ul li a {
   color: var(--color-text-light);
 }
 
-@media (min-width: 300px) {
+@media (min-width: 500px) {
+
   #menu-button,
   #menu-logo,
   #menu-overlay {
     display: none;
   }
+
   #menu-items {
     display: flex;
     position: static;
     height: 60px;
     width: auto;
+    z-index: 1;
   }
+
   ul {
     display: flex;
     flex-direction: row;
     height: 60px;
     align-items: center;
   }
+
   ul li {
     margin: 0%;
     margin-left: 20px;

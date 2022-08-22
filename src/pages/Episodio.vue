@@ -150,7 +150,7 @@ export default {
           maisDeUmFiltro = true;
         }
       }
-      if (url) {
+      if (url && this.exibirFiltro) {
         api.get(url).then((response) => {
           this.array_epsodio = response.data.results;
           this.array_epsodio.forEach((value, index) => {

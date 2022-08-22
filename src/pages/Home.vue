@@ -1,13 +1,10 @@
 <template>
   <main>
-    <v-alert
-      v-if="alerta"
-      prominent
-      type="error"
-    >
+    <v-alert v-if="alerta" prominent type="error">
       <v-row align="center">
         <v-col class="grow">
-          Ainda estamos em construção, provavelmente nunca iremos acabar!!
+          Ainda estamos em construção, provavelmente nunca iremos acabar!! Droga
+          Morty cada você!!
         </v-col>
         <v-col class="shrink">
           <v-btn @click="alerta = false">Fechar</v-btn>
@@ -17,8 +14,7 @@
     <v-row>
       <v-col>
         <h1>
-          BEM VINDOS A CIDADELA DOS RICKS OBS: estamos em Construção!! Droga
-          Morty cada você
+          BEM VINDOS A CIDADELA DOS RICKS OBS: estamos em Construção!!
         </h1>
       </v-col>
     </v-row>
@@ -28,68 +24,41 @@
     <v-card class="bloco1">
       <v-row class="mx-3">
         <v-col cols="12" sm="6" md="11">
-          <v-card-title
-            ><button @click="exibirFiltro = !exibirFiltro">
+          <v-card-title><button @click="exibirFiltro = !exibirFiltro">
               Filtro <v-icon>mdi-menu-up</v-icon>
             </button>
           </v-card-title>
         </v-col>
         <v-col cols="12" sm="6" md="1">
-          <v-btn
-            id="limparFiltro"
-            color="none"
-            @click="alerta = true"
-            v-if="exibirFiltro"
-          >
-            <v-icon>mdi-magnify</v-icon></v-btn
-          >
+          <v-btn id="limparFiltro" color="none" @click="alerta = true" v-if="exibirFiltro">
+            <v-icon>mdi-magnify</v-icon>
+          </v-btn>
         </v-col>
       </v-row>
       <v-row v-if="exibirFiltro" id="filtroText" class="mx-3">
         <v-col cols="12" sm="6" md="6">
           <label class="labels pb-3" for="nameEpsodio">Name</label>
-          <v-text-field
-            v-model="nameEpsodio"
-            id="nameEpsodio"
-            dense
-            plyaaceholder="Exp: Pilot"
-            @input="filtrarArray()"
-            outlined
-          ></v-text-field>
+          <v-text-field v-model="nameEpsodio" id="nameEpsodio" dense plyaaceholder="Exp: Pilot" @input="filtrarArray()"
+            outlined></v-text-field>
         </v-col>
         <v-col cols="12" sm="6" md="6">
-          <label class="labels pb-3" for="numeroEpsodio"
-            >Numero da curiosidade</label
-          >
-          <v-text-field
-            v-model="numeroEpsodio"
-            id="numeroEpsodio"
-            dense
-            plyaaceholder="Exp: 1"
-            @input="filtrarArray()"
-            outlined
-          ></v-text-field>
+          <label class="labels pb-3" for="numeroEpsodio">Numero da curiosidade</label>
+          <v-text-field v-model="numeroEpsodio" id="numeroEpsodio" dense plyaaceholder="Exp: 1" @input="filtrarArray()"
+            outlined></v-text-field>
         </v-col>
       </v-row>
     </v-card>
     <ul>
-      <li
-        class="itens"
-        v-for="detalhes of array_informacoes"
-        v-bind:key="detalhes.id"
-      >
+      <li class="itens" v-for="detalhes of array_informacoes" v-bind:key="detalhes.id">
         <v-card>
-          <CardItens
-            :home="true"
-            :iten="
-              passaInformacoesPricipal(
-                detalhes.image,
-                detalhes.nome,
-                detalhes.numberCuriosidade,
-                detalhes.detalhes
-              )
-            "
-          ></CardItens>
+          <CardItens :home="true" :character="false" :iten="
+            passaInformacoesPricipal(
+              detalhes.image,
+              detalhes.nome,
+              detalhes.numberCuriosidade,
+              detalhes.detalhes
+            )
+          "></CardItens>
         </v-card>
       </li>
     </ul>
@@ -109,7 +78,7 @@ export default {
   },
   data() {
     return {
-      alerta:false,
+      alerta: false,
       sheet: false,
       exibirFiltro: false,
       array_informacoes: [
@@ -183,6 +152,7 @@ h1 {
   color: white;
   border: black;
 }
+
 main {
   background-image: url("@/assets/Rick-and-Morty-Citadel.jpg");
   background-repeat: no-repeat;
@@ -199,11 +169,13 @@ main {
   -o-background-size: cover;
   background-attachment: fixed;
 }
+
 h2 {
   color: white;
   margin-left: 30px;
   font-size: 30px;
 }
+
 #curiosidades {
   width: 100%;
 }

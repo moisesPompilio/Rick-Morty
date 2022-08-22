@@ -46,7 +46,7 @@ export default {
     },
     home: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   methods: {

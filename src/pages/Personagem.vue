@@ -3,139 +3,81 @@
     <v-card class="bloco1">
       <v-row class="mx-3">
         <v-col cols="12" sm="6" md="11">
-          <v-card-title
-            ><button>
+          <v-card-title @click="exibirFiltro = !exibirFiltro"><button>
               Filtro <v-icon>mdi-menu-up</v-icon>
-            </button></v-card-title
-          >
+            </button></v-card-title>
         </v-col>
         <v-col cols="12" sm="6" md="1">
           <v-btn id="limparFiltro" color="none" @click="limparFiltro()">
-            <v-icon>mdi-trash-can</v-icon></v-btn
-          >
+            <v-icon>mdi-trash-can</v-icon>
+          </v-btn>
         </v-col>
       </v-row>
       <v-row v-if="exibirFiltro" class="mx-3">
         <v-col cols="12" sm="6" md="6">
           <label class="texto labels pb-3" for="FiltroName">Name</label>
-          <v-text-field
-            class="texto"
-            v-model="filtroName"
-            id="FiltroName"
-            dense
-            plyaaceholder="Exp: Pilot"
-            @input="filtrarArray()"
-            outlined
-          ></v-text-field>
+          <v-text-field class="texto" v-model="filtroName" id="FiltroName" dense plyaaceholder="Exp: Pilot"
+            @input="filtrarArray()" outlined></v-text-field>
         </v-col>
         <v-col cols="12" sm="6" md="6">
           <label class="texto labels pb-3" for="filtroSpecies"> Specie</label>
-          <v-text-field
-            class="texto"
-            v-model="filtroSpecies"
-            id="filtroSpecies"
-            dense
-            plyaaceholder="Exp: 1"
-            @input="filtrarArray()"
-            outlined
-          ></v-text-field>
+          <v-text-field class="texto" v-model="filtroSpecies" id="filtroSpecies" dense plyaaceholder="Exp: 1"
+            @input="filtrarArray()" outlined></v-text-field>
         </v-col>
       </v-row>
       <v-row v-if="exibirFiltro" class="mx-3">
         <v-col cols="12" sm="6" md="4">
           <label class="texto labels pb-3" for="filtroType"> Tipo</label>
-          <v-text-field
-            class="texto"
-            v-model="filtroType"
-            id="filtroType"
-            dense
-            plyaaceholder="Exp: 1"
-            @input="filtrarArray()"
-            outlined
-          ></v-text-field>
+          <v-text-field class="texto" v-model="filtroType" id="filtroType" dense plyaaceholder="Exp: 1"
+            @input="filtrarArray()" outlined></v-text-field>
         </v-col>
         <v-col cols="12" sm="6" md="4">
-          <v-select
-            plyaaceholder="Exp: male"
-            :items="gender"
-            label="Genero"
-            v-model="filtroGender"
-            @input="filtrarArray()"
-          ></v-select>
+          <v-select plyaaceholder="Exp: male" :items="gender" label="Genero" v-model="filtroGender"
+            @input="filtrarArray()"></v-select>
         </v-col>
         <v-col cols="12" sm="6" md="4">
-          <v-select
-            plyaaceholder="Exp: human"
-            :items="status"
-            label="Status"
-            v-model="filtroStatus"
-            @input="filtrarArray()"
-          ></v-select>
+          <v-select plyaaceholder="Exp: human" :items="status" label="Status" v-model="filtroStatus"
+            @input="filtrarArray()"></v-select>
         </v-col>
       </v-row>
     </v-card>
     <v-card>
       <v-sheet elevation="6" v-if="pages">
-        <v-tabs
-          background-color="var(--color-background-nav)"
-          dark
-          next-icon="mdi-arrow-right-bold-box-outline"
-          prev-icon="mdi-arrow-left-bold-box-outline"
-          show-arrows
-        >
+        <v-tabs background-color="var(--color-background-nav)" dark next-icon="mdi-arrow-right-bold-box-outline"
+          prev-icon="mdi-arrow-left-bold-box-outline" show-arrows>
           <v-tabs-slider color="yellow"></v-tabs-slider>
-          <v-tab
-            v-for="i in 42"
-            :key="i"
-            :href="'#tab-' + i"
-            @click="paginaEscolhida(i)"
-          >
+          <v-tab v-for="i in 42" :key="i" :href="'#tab-' + i" @click="paginaEscolhida(i)">
             Page {{ i }}
           </v-tab>
         </v-tabs>
       </v-sheet>
     </v-card>
     <ul>
-      <li
-        class="itens"
-        v-for="personagem of arr_personagem"
-        :key="personagem.id"
-      >
+      <li class="itens" v-for="personagem of arr_personagem" :key="personagem.id">
         <v-card class="bloco">
-          <Card-Itens
-            :iten="
-              passaInformacoesPricipal(
-                personagem.image,
-                personagem.name,
-                personagem.origin.name,
-                epsidiosCorrigir(personagem.episode)
-              )
-            "
-          ></Card-Itens>
-          <v-btn
-            color="primary"
-            class="center"
-            @click="
-              (exibirDetalhes = true),
-                passaInformacao(
-                  personagem.location.name,
-                  personagem.status,
-                  personagem.type,
-                  personagem.gender,
-                  personagem.species
-                )
-            "
-            >Detalhes</v-btn
-          >
+          <Card-Itens :character="false" :home="false" :iten="
+            passaInformacoesPricipal(
+              personagem.image,
+              personagem.name,
+              personagem.origin.name,
+              epsidiosCorrigir(personagem.episode)
+            )
+          "></Card-Itens>
+          <v-btn color="primary" class="center" @click="
+            (exibirDetalhes = true),
+            passaInformacao(
+              personagem.location.name,
+              personagem.status,
+              personagem.type,
+              personagem.gender,
+              personagem.species
+            )
+          ">Detalhes</v-btn>
         </v-card>
       </li>
     </ul>
-    <Btn-detalhes
-      :banana="informacoes"
-      v-if="exibirDetalhes"
-      @decricaoActive="exibirDetalhes = $event"
-      id="detalhes"
-    ></Btn-detalhes>
+    <Btn-detalhes :banana="informacoes" v-if="exibirDetalhes" @decricaoActive="exibirDetalhes = $event" id="detalhes">
+    </Btn-detalhes>
   </main>
 </template>
 
